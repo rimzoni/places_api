@@ -1,0 +1,28 @@
+{
+  "name": "places_api",
+  "version": "1.0.0",
+  "description": "Places api with nodejs and express",
+  "main": "index.js",
+  "dependencies": {
+    "express": "^4.11.2"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/rimzoni/places_api.git"
+  },
+  "keywords": [
+    "places",
+    "node",
+    "express",
+    "javascript"
+  ],
+  "author": "Mirza Arifovic",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/rimzoni/places_api/issues"
+  },
+  "homepage": "https://github.com/rimzoni/places_api#readme"
+}
