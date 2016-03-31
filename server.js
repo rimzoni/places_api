@@ -7,5 +7,5 @@ app.use('/', function(req,res){
 });
 
 app.listen(8020, function(){
-	console.log('Listening on port 8020');
+	console.log('Gulp is listening on port 8020');
 });
