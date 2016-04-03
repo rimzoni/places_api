@@ -11,15 +11,15 @@ REST API for Places APP.
 
         "express": "^4.11.2"
 
-2. Express:
+3. Gulp:
 
         "gulp": "^3.9.1"
 
-2. Express:
+4. Gulp-Nodemon:
 
         "gulp-nodemon": "^2.0.6"
 
-2. Express:
+5. Mongoose:
 
         "mongoose": "^4.4.10"
 
