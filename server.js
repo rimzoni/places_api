@@ -12,7 +12,7 @@ placesRouter.route('/Places')
 		.get(function(req,res){
 			Place.find(function(err,places){
 				if(err)
-					console.log(error);
+					res.status(500).send(err);
 				else
 					res.json(places);
 			})
