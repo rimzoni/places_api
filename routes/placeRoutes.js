@@ -3,7 +3,7 @@ var express = require('express');
 var routes = function(Place){
 
   var placesRouter = express.Router();
-  
+
   placesRouter.route('/')
   		.post(function(req,res){
   			var place = new Place(req.body);
@@ -36,7 +36,20 @@ var routes = function(Place){
   				else
   					res.json(place);
   			})
-  });
+      })
+      .put(function(req,res){
+        Place.findById(req.params.placeId,function(err,place){
+         if(err)
+           res.status(500).send(err);
+         else{
+           place.name = req.body.name;
+           place.description = req.body.description;
+           place.category = req.body.category;
+           place.save();
+           res.json(place);
+         }
+       })
+      });
 return placesRouter;
 };
 
