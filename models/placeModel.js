@@ -5,8 +5,11 @@ var mongoose = require('mongoose');
 var placeModel = new Schema({
     name :{type: String},
     description:{type:String},
-    category:{type:String}
+    image:{type:String},
+    lat:{type:String},
+    lng:{type:String},
+    category:{type:String},
+    active:{type:Boolean}
 });
-
 
 module.exports = mongoose.model('Place', placeModel);

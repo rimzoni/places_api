@@ -44,7 +44,13 @@ var routes = function(Place){
          else{
            place.name = req.body.name;
            place.description = req.body.description;
+           place.image = req.body.image;
+           place.lat = req.body.lat;
+           place.lng = req.body.lng;
            place.category = req.body.category;
+           place.active = req.body.active;
+
+
            place.save();
            res.json(place);
          }
