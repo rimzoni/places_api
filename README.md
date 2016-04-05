@@ -26,3 +26,4 @@ REST API for Places APP.
 ## Setup project:
 
 * npm install
+* gulp
