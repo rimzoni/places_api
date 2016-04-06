@@ -19,6 +19,14 @@ var routes = function(Place){
   				query.name = req.query.name;
   			}
 
+        if(req.query.category){
+          query.category = req.query.category;
+        }
+
+        if(req.query.active){
+          query.active = req.query.active;
+        }
+
   			Place.find(query,function(err,places){
   				if(err)
   					res.status(500).send(err);
