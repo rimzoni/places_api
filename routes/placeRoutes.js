@@ -35,36 +35,36 @@ var routes = function(Place){
   			})
   		});
 
+  placesRouter.use('/:placeId', function(req,res,next){
+    Place.findById(req.params.placeId,function(err,place){
+      if(err)
+        res.status(500).send(err);
+      else if(place){
+        req.place = place;
+        next();
+      }
+      else{
+        res.status(404).send('Place not found');
+      }
+    })
+  });
   placesRouter.route('/:placeId')
   		.get(function(req,res){
-
-  			Place.findById(req.params.placeId,function(err,place){
-  				if(err)
-  					res.status(500).send(err);
-  				else
-  					res.json(place);
-  			})
+        res.json(req.place);
       })
       .put(function(req,res){
-        Place.findById(req.params.placeId,function(err,place){
-         if(err)
-           res.status(500).send(err);
-         else{
-           place.name = req.body.name;
-           place.description = req.body.description;
-           place.image = req.body.image;
-           place.lat = req.body.lat;
-           place.lng = req.body.lng;
-           place.category = req.body.category;
-           place.active = req.body.active;
+         req.place.name = req.body.name;
+         req.place.description = req.body.description;
+         req.place.image = req.body.image;
+         req.place.lat = req.body.lat;
+         req.place.lng = req.body.lng;
+         req.place.category = req.body.category;
+         req.place.active = req.body.active;
 
-
-           place.save();
-           res.json(place);
-         }
-       })
-      });
-return placesRouter;
+         req.place.save();
+         res.json(req.place);
+       });
+       return placesRouter;
 };
 
 module.exports = routes;
