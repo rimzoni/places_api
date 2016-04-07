@@ -61,8 +61,29 @@ var routes = function(Place){
          req.place.category = req.body.category;
          req.place.active = req.body.active;
 
-         req.place.save();
-         res.json(req.place);
+         req.place.save(function(err){
+           if(err)
+             res.status(500).send(err);
+           else{
+             res.json(req.place);
+           }
+         });
+       })
+       .patch(function(req,res){
+         if(req.body._id)
+          delete req.body._id;
+
+         for(var p in req.body){
+           req.place[p] = req.body[p];
+         }
+
+         req.place.save(function(err){
+           if(err)
+             res.status(500).send(err);
+           else{
+             res.json(req.place);
+           }
+         });
        });
        return placesRouter;
 };
