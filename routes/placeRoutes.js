@@ -84,6 +84,15 @@ var routes = function(Place){
              res.json(req.place);
            }
          });
+       })
+       .delete(function(req,res){
+        req.place.remove(function(err){
+          if(err)
+            res.status(500).send(err);
+          else{
+            res.status(204).send("Place removed.");
+          }
+        });
        });
        return placesRouter;
 };
