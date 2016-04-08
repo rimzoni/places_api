@@ -2,38 +2,12 @@ var express = require('express');
 
 var routes = function(Place){
 
-  var placesRouter = express.Router();
+var placesRouter = express.Router();
 
+var placeController = require('../controllers/placeController')(Place);
   placesRouter.route('/')
-  		.post(function(req,res){
-  			var place = new Place(req.body);
-
-  			place.save();
-
-  			res.status(201).send(place);
-  		})
-  		.get(function(req,res){
-
-  			var query = {};
-  			if(req.query.name){
-  				query.name = req.query.name;
-  			}
-
-        if(req.query.category){
-          query.category = req.query.category;
-        }
-
-        if(req.query.active){
-          query.active = req.query.active;
-        }
-
-  			Place.find(query,function(err,places){
-  				if(err)
-  					res.status(500).send(err);
-  				else
-  					res.json(places);
-  			})
-  		});
+  		.post(placeController.post)
+  		.get(placeController.get);
 
   placesRouter.use('/:placeId', function(req,res,next){
     Place.findById(req.params.placeId,function(err,place){
