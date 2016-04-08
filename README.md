@@ -23,7 +23,17 @@ REST API for Places APP.
 
         "mongoose": "^4.4.10"
 
+6. Gulp-Mocha:
+
+        "gulp-mocha": "^2.2.0",
+        "should": "^8.3.0",
+        "sinon": "^1.17.3"
+
 ## Setup project:
 
 * npm install
 * gulp
+
+## Running tests:
+
+* gulp test
