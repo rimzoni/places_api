@@ -3,9 +3,15 @@ var placeController = function(Place){
   var post = function(req,res){
     var place = new Place(req.body);
 
-    place.save();
-
-    res.status(201).send(place);
+    if(!req.body.name){
+      res.status(400);
+      res.send('Name is required');
+    }
+    else{
+      place.save();
+      res.status(201);
+      res.send(place);
+    }
   }
 
   var get = function(req,res){
