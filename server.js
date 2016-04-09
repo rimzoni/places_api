@@ -15,7 +15,7 @@ placesRouter = require('./routes/placeRoutes')(Place);
 app.use('/api/places',placesRouter);
 
 app.use('/', function(req,res){
-	res.send('Welcome to my API!');
+	res.send('Welcome to places API!');
 });
 
 app.listen(8020, function(){
