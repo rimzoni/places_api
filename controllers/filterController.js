@@ -22,7 +22,7 @@ var filterController = function(Filter){
     }
 
     if(req.query.description){
-      query.category = req.query.description;
+      query.description = req.query.description;
     }
 
     if(req.query.active){
