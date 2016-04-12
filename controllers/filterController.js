@@ -2,7 +2,7 @@ var filterController = function(Filter){
 
   var post = function(req,res){
     var filter = new Filter(req.body);
-
+    
     if(!req.body.name){
       res.status(400);
       res.send('Name is required');

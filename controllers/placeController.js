@@ -32,8 +32,16 @@ var placeController = function(Place){
     Place.find(query,function(err,places){
       if(err)
         res.status(500).send(err);
-      else
-        res.json(places);
+      else{
+        var returnPlace =[];
+        places.forEach(function(element,index,array){
+          var newPlace = element.toJSON();
+          newPlace.links = {};
+          newPlace.links.self = 'http://' + req.headers.host + '/api/places/' + newPlace._id;
+          returnPlace.push(newPlace);
+        });
+        res.json(returnPlace);
+      }
     });
   }
 
