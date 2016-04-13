@@ -24,7 +24,20 @@ var filterController = require('../controllers/filterController')(Filter);
   });
   filterRouter.route('/:filterId')
   		.get(function(req,res){
-        res.json(req.filter);
+
+        var returnFilter = req.filter.toJSON();
+
+        returnFilter.links = {};
+
+        var nameLink = 'http://' + req.headers.host + '/api/filters/?name=' + returnFilter.name;
+        var descriptionLink = 'http://' + req.headers.host + '/api/filters/?description=' + returnFilter.description;
+        var activeLink = 'http://' + req.headers.host + '/api/filters/?active=' + returnFilter.active;
+
+        returnFilter.links.filterByName = nameLink.replace(' ','%20');
+        returnFilter.links.filterByDescription = descriptionLink.replace(' ','%20');
+        returnFilter.links.filterByActive = activeLink.replace(' ','%20');
+
+        res.json(returnFilter);
       })
       .put(function(req,res){
          req.filter.name = req.body.name;
