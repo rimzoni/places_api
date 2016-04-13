@@ -2,7 +2,7 @@ var filterController = function(Filter){
 
   var post = function(req,res){
     var filter = new Filter(req.body);
-    
+
     if(!req.body.name){
       res.status(400);
       res.send('Name is required');
@@ -33,7 +33,16 @@ var filterController = function(Filter){
       if(err)
         res.status(500).send(err);
       else
-        res.json(filters);
+        var returnFilter =[];
+
+        filters.forEach(function(element,index,array){
+          var newFilter = element.toJSON();
+          newFilter.links = {};
+          newFilter.links.self = 'http://' + req.headers.host + '/api/filters/' + newFilter._id;
+          returnFilter.push(newFilter);
+        });
+
+        res.json(returnFilter);
     });
   }
 

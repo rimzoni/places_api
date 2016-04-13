@@ -34,12 +34,14 @@ var placeController = function(Place){
         res.status(500).send(err);
       else{
         var returnPlace =[];
+
         places.forEach(function(element,index,array){
           var newPlace = element.toJSON();
           newPlace.links = {};
           newPlace.links.self = 'http://' + req.headers.host + '/api/places/' + newPlace._id;
           returnPlace.push(newPlace);
         });
+        
         res.json(returnPlace);
       }
     });
