@@ -23,22 +23,7 @@ var placeController = require('../controllers/placeController')(Place);
     })
   });
   placesRouter.route('/:placeId')
-  		.get(function(req,res){
-
-        var returnPlace = req.place.toJSON();
-
-        returnPlace.links = {};
-
-        var nameLink = 'http://' + req.headers.host + '/api/places/?name=' + returnPlace.name;
-        var categoryLink = 'http://' + req.headers.host + '/api/places/?category=' + returnPlace.category;
-        var activeLink = 'http://' + req.headers.host + '/api/places/?active=' + returnPlace.active;
-
-        returnPlace.links.filterByName = nameLink.replace(' ','%20');
-        returnPlace.links.filterByCategory = categoryLink.replace(' ','%20');
-        returnPlace.links.filterByActive = activeLink.replace(' ','%20');
-
-        res.json(returnPlace);
-      })
+  		.get(placeController.getPlaceId)
       .put(function(req,res){
          req.place.name = req.body.name;
          req.place.description = req.body.description;

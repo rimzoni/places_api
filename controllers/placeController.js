@@ -41,16 +41,34 @@ var placeController = function(Place){
           newPlace.links.self = 'http://' + req.headers.host + '/api/places/' + newPlace._id;
           returnPlace.push(newPlace);
         });
-        
+
         res.json(returnPlace);
       }
     });
   }
 
+  var getPlaceId = function(req,res){
+
+    var returnPlace = req.place.toJSON();
+
+    returnPlace.links = {};
+
+    var nameLink = 'http://' + req.headers.host + '/api/places/?name=' + returnPlace.name;
+    var categoryLink = 'http://' + req.headers.host + '/api/places/?category=' + returnPlace.category;
+    var activeLink = 'http://' + req.headers.host + '/api/places/?active=' + returnPlace.active;
+
+    returnPlace.links.filterByName = nameLink.replace(' ','%20');
+    returnPlace.links.filterByCategory = categoryLink.replace(' ','%20');
+    returnPlace.links.filterByActive = activeLink.replace(' ','%20');
+
+    res.json(returnPlace);
+  }
+
   return {
     post : post,
-    get  : get
+    get  : get,
+    getPlaceId : getPlaceId
   }
 };
 
-module.exports =placeController;
+module.exports = placeController;
