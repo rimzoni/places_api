@@ -24,48 +24,9 @@ var placeController = require('../controllers/placeController')(Place);
   });
   placesRouter.route('/:placeId')
   		.get(placeController.getPlaceId)
-      .put(function(req,res){
-         req.place.name = req.body.name;
-         req.place.description = req.body.description;
-         req.place.image = req.body.image;
-         req.place.lat = req.body.lat;
-         req.place.lng = req.body.lng;
-         req.place.category = req.body.category;
-         req.place.active = req.body.active;
-
-         req.place.save(function(err){
-           if(err)
-             res.status(500).send(err);
-           else{
-             res.json(req.place);
-           }
-         });
-       })
-       .patch(function(req,res){
-         if(req.body._id)
-          delete req.body._id;
-
-         for(var p in req.body){
-           req.place[p] = req.body[p];
-         }
-
-         req.place.save(function(err){
-           if(err)
-             res.status(500).send(err);
-           else{
-             res.json(req.place);
-           }
-         });
-       })
-       .delete(function(req,res){
-        req.place.remove(function(err){
-          if(err)
-            res.status(500).send(err);
-          else{
-            res.status(204).send("Place removed.");
-          }
-        });
-       });
+      .put(placeController.putPlaceId)
+      .patch(placeController.patchPlaceId)
+      .delete(placeController.deletePlaceId);
        return placesRouter;
 };
 
