@@ -46,9 +46,27 @@ var filterController = function(Filter){
     });
   }
 
+  var getFilterId = function(req,res){
+
+    var returnFilter = req.filter.toJSON();
+
+    returnFilter.links = {};
+
+    var nameLink = 'http://' + req.headers.host + '/api/filters/?name=' + returnFilter.name;
+    var descriptionLink = 'http://' + req.headers.host + '/api/filters/?description=' + returnFilter.description;
+    var activeLink = 'http://' + req.headers.host + '/api/filters/?active=' + returnFilter.active;
+
+    returnFilter.links.filterByName = nameLink.replace(' ','%20');
+    returnFilter.links.filterByDescription = descriptionLink.replace(' ','%20');
+    returnFilter.links.filterByActive = activeLink.replace(' ','%20');
+
+    res.json(returnFilter);
+  }
+
   return {
     post : post,
-    get  : get
+    get  : get,
+    getFilterId : getFilterId
   }
 };
 
