@@ -24,45 +24,11 @@ var filterController = require('../controllers/filterController')(Filter);
   });
   filterRouter.route('/:filterId')
   		.get(filterController.getFilterId)
-      .put(function(req,res){
-         req.filter.name = req.body.name;
-         req.filter.description = req.body.description;
-         req.filter.active = req.body.active;
+      .put(filterController.putFilterId)
+      .patch(filterController.patchFilterId)
+      .delete(filterController.deleteFilterId);
 
-         req.filter.save(function(err){
-           if(err)
-             res.status(500).send(err);
-           else{
-             res.json(req.filter);
-           }
-         });
-       })
-       .patch(function(req,res){
-         if(req.body._id)
-          delete req.body._id;
-
-         for(var p in req.body){
-           req.filter[p] = req.body[p];
-         }
-
-         req.filter.save(function(err){
-           if(err)
-             res.status(500).send(err);
-           else{
-             res.json(req.filter);
-           }
-         });
-       })
-       .delete(function(req,res){
-        req.filter.remove(function(err){
-          if(err)
-            res.status(500).send(err);
-          else{
-            res.status(204).send("Filter removed.");
-          }
-        });
-       });
-       return filterRouter;
+      return filterRouter;
 };
 
 module.exports = routes;
