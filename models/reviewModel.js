@@ -4,6 +4,7 @@ var mongoose = require('mongoose');
 
 var reviewModel = new Schema({
     userId :{type: String},
+    placeId : {type: String},
     review:{type:String},
     numberOfStars:{type: Number},
     created: { type: Date, default: Date.now }
