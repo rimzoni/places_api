@@ -7,6 +7,7 @@ var db = mongoose.connect('mongodb://localhost/placeAPI');
 var Place  = require('./models/placeModel');
 var Filter = require('./models/filterModel');
 var Review = require('./models/reviewModel');
+var User   = require('./models/userModel');
 
 var app = express();
 app.use(bodyParser.urlencoded({extended:true}))
